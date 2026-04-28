@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sven van Holten Charria</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>S</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #FFFFF8; }
+  ::selection { background: #E8D6C8; }
+  a { color: #A04030; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container {
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: #333; max-width: 800px; margin: 0 auto;
+    padding: 60px 24px 80px; font-size: 17px; line-height: 1.8;
+  }
+
+  /* Photo */
+  .photo-wrap { width: 100%; margin-bottom: 24px; border-radius: 4px; overflow: hidden; position: relative; }
+  .photo-wrap img { width: 100%; display: block; }
+  .photo-gradient {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+    pointer-events: none;
+  }
+  .photo-name {
+    position: absolute; bottom: 18px; left: 22px; z-index: 2;
+  }
+  .photo-name h1 {
+    font-size: 32px; font-weight: 500; letter-spacing: -0.01em;
+    color: #fff; margin: 0; line-height: 1.1;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+  }
+  .photo-name .subtitle {
+    font-family: 'Libre Franklin', sans-serif; font-size: 12.5px;
+    font-weight: 400; color: rgba(255,255,255,0.78);
+    margin-top: 5px; letter-spacing: 0.015em;
+  }
+
+  /* Caption */
+  .photo-caption {
+    position: absolute; top: 5%; right: 3%; z-index: 3;
+    max-width: 200px; text-align: right;
+  }
+  .photo-caption-text {
+    font-family: 'Caveat', cursive; font-size: 16px; color: #fff;
+    font-weight: 700; line-height: 1.3;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6), 0 0 4px rgba(0,0,0,0.3);
+    transform: rotate(-2deg); transition: opacity 0.35s ease;
+  }
+  .photo-caption svg {
+    position: absolute; bottom: -82px; left: 10px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
+    pointer-events: none;
+  }
+
+  /* Nav */
+  nav {
+    display: flex; gap: 24px;
+    font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 500;
+    border-bottom: 1px solid #E8E4DC; padding-bottom: 12px;
+  }
+  nav a { color: #555; }
+  nav .spacer { margin-left: auto; }
+
+  /* Section labels */
+  .section-label {
+    font-family: 'Libre Franklin', sans-serif; font-size: 13px;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #999; margin-bottom: 32px;
+  }
+  .paper-tag {
+    font-family: 'Libre Franklin', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .paper-tag.wip { color: #A04030; }
+  .paper-tag.done { color: #999; }
+
+  /* Papers */
+  .paper { margin-bottom: 32px; }
+  .paper h3 { font-size: 19px; font-weight: 600; color: #222; line-height: 1.35; margin-bottom: 4px; }
+  .paper h3.big { font-size: 22px; }
+  .paper .meta { font-size: 14px; color: #777; margin-bottom: 4px; }
+  .paper .links { margin-top: 6px; font-size: 13px; font-family: 'Libre Franklin', sans-serif; }
+
+  /* Abstract toggle */
+  .abs-toggle { font-size: 13px; color: #888; cursor: pointer; font-family: 'Libre Franklin', sans-serif; margin-top: 4px; }
+  .abs-toggle:hover { color: #666; }
+  .abs-content { margin-top: 8px; font-size: 15.5px; line-height: 1.75; color: #555; display: none; }
+  .abs-content.open { display: block; }
+
+  hr { border: none; border-top: 1px solid #E8E4DC; margin-bottom: 44px; }
+  hr.sm { margin-bottom: 32px; }
+
+  .footer {
+    margin-top: 48px; padding-top: 16px; border-top: 1px solid #E8E4DC;
+    font-family: 'Libre Franklin', sans-serif; font-size: 11px; color: #ccc;
+  }
+  .contact-links { color: #ddd; margin: 0 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header style="margin-bottom: 36px;">
+    <div class="photo-wrap">
+      <img src="/Users/svenvanholten/Desktop/FOTOS/Erasmus trustfund/ERS_3263.jpg" alt="Sven van Holten Charria presenting">
+      <div class="photo-gradient"></div>
+      <div class="photo-caption">
+        <div class="photo-caption-text" id="caption-text"></div>
+        <svg width="80" height="65" viewBox="0 0 80 65" fill="none">
+          <path d="M 62 2 C 58 8, 52 16, 44 24 C 36 32, 26 40, 16 50" stroke="#fff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M 28 51 L 15 55 L 21 44" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="photo-name">
+        <h1>Sven van Holten Charria</h1>
+        <div class="subtitle">Pre-doctoral Research Assistant · LSE Department of Economics</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#bio">Bio</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="spacer">CV ↓</a>
+    </nav>
+  </header>
+
+  <!-- BIO -->
+  <section id="bio" style="margin-bottom: 44px;">
+    <p>
+      I am a pre-doctoral research assistant at the
+      <a href="https://www.lse.ac.uk/economics" target="_blank">London School of Economics</a>,
+      in the <a href="http://www.centreformacroeconomics.ac.uk/Home.aspx" target="_blank">Centre for Macroeconomics</a>,
+      working under
+      <a href="https://sites.google.com/view/ricardoreis" target="_blank">Ricardo Reis</a>,
+      <a href="https://benjaminmoll.com" target="_blank">Benjamin Moll</a>, and
+      <a href="https://sites.google.com/view/jadhazell/home" target="_blank">Jonathan Hazell</a>.
+    </p>
+    <p style="margin-top: 14px;">
+      My research explores what changes when you relax the standard assumptions in economics.
+      In macroeconomics, for instance, households are typically assumed to perceive income risk
+      correctly. I am currently working on a heterogeneous agent model where they don't, and
+      studying how biased risk beliefs feed into precautionary saving and aggregate dynamics.
+      In earlier work, I have brought economic priors into high-dimensional variable selection
+      in econometrics, and used machine learning to estimate volatility dynamics without
+      imposing parametric structure.
+    </p>
+    <p style="margin-top: 14px;">
+      I hold an MSc in <a href="https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2025/MSc-Econometrics-and-Mathematical-Economics" target="_blank">Econometrics and Mathematical Economics</a> (EME)
+      from the LSE, with distinction, and a double BSc in <a href="https://www.eur.nl/en/ese/bachelor/double-degree-econometrics-and-economics" target="_blank">Econometrics and Economics</a> from
+      Erasmus University Rotterdam, with honors.
+    </p>
+  </section>
+
+  <hr>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label">Research</div>
+
+    <div class="paper-tag wip">Work in Progress</div>
+
+    <div class="paper">
+      <h3 class="big">Perceived Income Risk and Its Dynamics Across the Income Distribution</h3>
+      <div class="abs-toggle" onclick="toggleAbs(this)">▸ Abstract (click to expand)</div>
+      <div class="abs-content">
+        <p>
+          Standard heterogeneous agent models assume households perceive income risk correctly.
+          Using density forecasts from the NY Fed SCE, I show they don't: perceived risk has
+          its own persistent dynamics, and the persistence is steeply income-graded. The same
+          gradient does not appear in realised income data, suggesting a belief distortion
+          rather than differences in the actual income process. Income surprises raise perceived
+          risk at the bottom of the distribution but not at the top, and the effect lingers
+          far longer for low-income households. I embed these dynamics in a two-agent model
+          where excess precautionary saving from biased risk beliefs suppresses consumption
+          even after income itself has recovered.
+        </p>
+      </div>
+      <div class="links">
+        <a href="#">Slides</a> · <a href="#">Draft (coming soon)</a>
+      </div>
+    </div>
+
+    <hr class="sm">
+
+    <div class="paper-tag done">Completed Papers</div>
+
+    <div class="paper">
+      <h3><a href="https://github.com/sven56/researchProjects/blob/6a974a008a2cfec2e17bed3c8313fae9143723c5/Thesis.pdf" target="_blank">
+        Intuitive Inference: Enhancing Post-Double Selection Inference on Treatment Effects with Intuition-Based Penalties
+      </a></h3>
+      <div class="meta">BSc Thesis · Supervised by Stan Koobs</div>
+      <div class="abs-toggle" onclick="toggleAbs(this)">▸ Abstract (click to expand)</div>
+      <div class="abs-content">
+        <p>
+          Standard post-double selection relies on purely data-driven penalisation to choose controls.
+          This paper integrates economically motivated prior beliefs on which controls matter into the
+          Lasso penalty structure before selection, not after. Monte Carlo simulations show that
+          belief-informed penalties reduce variance in treatment effect inference while maintaining
+          comparable bias. An empirical re-examination of the effect of abortion on crime rates yields
+          tighter inference, more interpretable control sets, and fewer spurious selections.
+        </p>
+      </div>
+      <div class="links"><a href="https://github.com/sven56/researchProjects/blob/6a974a008a2cfec2e17bed3c8313fae9143723c5/Thesis.pdf" target="_blank">Paper</a></div>
+    </div>
+
+    <div class="paper">
+      <h3><a href="https://github.com/sven56/researchProjects/blob/6a974a008a2cfec2e17bed3c8313fae9143723c5/MRF-ARCH%20Seminar%20Paper.pdf" target="_blank">
+        MRF-ARCH: A Machine Learning Approach to Forecast USD/GBP Tail Risk in a High Dimensional Dataset
+      </a></h3>
+      <div class="meta">Seminar Paper · With Maurizio Raina · Supervised by Robin Lumsdaine</div>
+      <div class="abs-toggle" onclick="toggleAbs(this)">▸ Abstract (click to expand)</div>
+      <div class="abs-content">
+        <p>
+          This paper derives an analytical equivalence between GARCH(1,1) and ARMA(1,1) to recast
+          volatility forecasting as a time-varying autoregressive parameter problem, then uses
+          macroeconomic random forests to estimate that parameter in a high-dimensional setting.
+          The approach isolates the causal effects of Brexit and COVID-19 on USD/GBP baseline
+          volatility and persistence, revealing smoother regime transitions and sharper identification
+          of macroeconomic shock transmission than conventional parametric models.
+        </p>
+      </div>
+      <div class="links"><a href="https://github.com/sven56/researchProjects/blob/6a974a008a2cfec2e17bed3c8313fae9143723c5/MRF-ARCH%20Seminar%20Paper.pdf" target="_blank">Paper</a></div>
+    </div>
+  </section>
+
+  <hr class="sm">
+
+  <!-- CONTACT -->
+  <section id="contact" style="margin-bottom: 32px;">
+    <div class="section-label">Contact</div>
+    <p style="font-size: 16px; line-height: 1.75;">
+      Department of Economics, London School of Economics<br>
+      Houghton Street, London WC2A 2AE<br>
+      <a href="mailto:sven@vanholten.com">sven@vanholten.com</a>
+      <span class="contact-links">·</span>
+      <a href="https://www.linkedin.com/in/svenvanholtencharria" target="_blank">LinkedIn</a>
+    </p>
+  </section>
+
+
+</div>
+
+<script>
+// Abstract toggle
+function toggleAbs(el) {
+  const content = el.nextElementSibling;
+  const isOpen = content.classList.toggle('open');
+  el.textContent = isOpen ? '▾ Abstract (click to collapse)' : '▸ Abstract (click to expand)';
+}
+
+// Cycling photo caption
+const TAKES = [
+  "spending hundreds of hours calibrating one parameter is a perfectly normal thing to do",
+  "pre-docs deserve a limitless university credit card",
+  "reading 1947 punchcard codebooks at 2am builds character",
+  "if your robustness table doesn't have 18 rows you're not trying",
+  "the real heterogeneous agents were the pre-docs we met along the way",
+  "convergence in 3000 iterations is basically instant",
+  "the identifying assumption is that I know what I'm doing",
+  "you should always cluster your standard errors (and your emotions)",
+  "a 45-slide appendix is just being thorough",
+  "every dataset is clean if you squint hard enough",
+  "my literature review is almost done (it's been 6 months)",
+];
+let captionIdx = 0;
+const captionEl = document.getElementById('caption-text');
+captionEl.textContent = "That's me, trying to convince you that " + TAKES[0];
+
+setInterval(() => {
+  captionEl.style.opacity = '0';
+  setTimeout(() => {
+    captionIdx = (captionIdx + 1) % TAKES.length;
+    captionEl.textContent = "That's me, trying to convince you that " + TAKES[captionIdx];
+    captionEl.style.opacity = '1';
+  }, 350);
+}, 6000);
+</script>
+</body>
+</html>
